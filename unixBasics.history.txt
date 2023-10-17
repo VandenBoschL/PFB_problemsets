@@ -1,3 +1,96 @@
+    1  zsh /tmp/miniconda_install.sh
+    6  cd bin
+    7  cd /bin/
+   13  date ; sleep 2 ; date
+   14  cd ~
+   15  curl -O https://raw.githubusercontent.com/prog4biol/pfb2023/master/files/cuffdiff.txt
+   16  grep Chr7 cuffdiff.txt > fav_chr_cuffdiff.txt
+   17  wc -l fav_chr_cuffdiff.txt
+   18  grep Chr9 cuffdiff.txt >> fav_chr_cuffdiff.txt
+   19  wc -l fav_chr_cuffdiff.txt
+   20  cat blablabla.txt
+   21  cat blablabla.txt 2> errors.txt
+   22  cat errors.txt
+   23  cat blablabla.txt > errors.txt
+   24  cat fav_chr_cuffdiff.txt blablabla.file
+   25  cat fav_chr_cuffdiff.txt blablabla.file 1> out.txt 2> err.txt
+   26  head out.txt
+   27  head err.txt
+   28  cat fav_chr_cuffdiff.txt blablabla.file &> all_out_err.txt
+   29  head all_out_err.txt
+   30  tail all_out_err.txt
+   32  cd ..
+   37  cd ~
+   38  mkdir problemsets
+   39  cd problemsets/'\n'
+   40  cd problemsets/
+   41  pwd
+   42  wget https://raw.githubusercontent.com/prog4biol/pfb2023/master/files/sequences.nt.fa
+   43  curl -O https://raw.githubusercontent.com/prog4biol/pfb2023/master/files/sequences.nt.fa
+   44  wc -lc sequences.nt.fa
+   45  head -1 sequences.nt.fa
+   46  tail -3 sequences.nt.fa
+   47  grep '>' sequences.nt.fa
+   48  grep '>' sequences.nt.fa | wc -l
+   49  mv sequences.nt.fa cancer_genes.fasta
+   51  curl -O https://raw.githubusercontent.com/prog4biol/pfb2023/master/files/cuffdiff.txt
+   52  head cuffdiff.txt
+   53  head -3 cuffdiff.txt
+   55  sort -kn 10 cuffdiff.txt | head
+   56  sort -k 10 cuffdiff.txt | head
+   58  sort -rk 10 cuffdiff.txt | head
+   59  sort -rk 10 cuffdiff.txt > top100.sorted.cuffdiff.out
+   60  sort -rk 10 cuffdiff.txt | head -100 > top100.sorted.cuffdiff.out
+   61  wc -l top100.sorted.cuffdiff.out
+   64  sort -rk 10 cuffdiff.txt | head -100 | sort -k 3 | cut -f1 | head
+   65  sort -rk 10 cuffdiff.txt | head -100 | sort -k 3 | cut -f1 | sort | head -3
+   66  sort -rk 10 cuffdiff.txt | head -100 | sort -k 3 | cut -f1 | sort -k 1 | head -3
+   67  sort -rk 10 cuffdiff.txt | head -100 | sort -k 3 | cut -f1 | sort | uniq > differentially.expressed.genes.txt
+   68  wc -l differentially.expressed.genes.txt
+   69  sort -rk 10 cuffdiff.txt | head
+   70  sort -rgk 10 cuffdiff.txt | head
+   71  sort -rgk 10 cuffdiff.txt | head -100 | cut -f1 | sort | uniq > differentially.expressed.genes.txt
+   72  wc -l differentially.expressed.genes.txt
+   73  head differentially.expressed.genes.txt
+   75  cat cancer_genes.fasta
+   76  less cancer_genes.fasta
+   77  cd ..
+   79  mk *cuffdiff* problemsets
+   80  mv *cuffdiff* problemsets
+   83  mv *.txt problemsets
+   93  mv problemsets/* PBS_problemsets
+   94  cd PBS_problemsets
+   96  git status
+   97  git add COMMIT_EDITMSG HEAD all_out_err.txt cancer_genes.fasta config cuffdiff.txt description differentially.expressed.genes.txt err.txt errors.txt fav_chr_cuffdiff.txt hooks/ index info/ logs/ objects/ out.txt refs/ top100.sorted.cuffdiff.out
+   98  git commit -m 'adding previous problem set files and untracked files'
+   99  git push
+  100  git status
+  101  mkdir files
+  102  mv *.fa files
+  104  mv *.fasta files
+  106  git add files/cancer_genes.fasta
+  107  git commit -m 'adding cancer_genes.fasta'
+  108  git push
+  109  vi files/mysequences.txt
+  110  vi files/mysequences.txt
+  111  git add files/mysequences.txt
+  112  git commit -m 'adding mysequences test file'
+  113  git push
+  114  mkdir fastas
+  115  cp files/cancer_genes.fasta fastas/
+  117  rm files/cancer_genes.fasta
+  118  git status
+  119  git add fastas/ files/
+  120  git commit -m 'moving fastas around'
+  121  git push
+  122  git status
+  123  vi oops
+  124  git add oops
+  125  git commit -m 'adding file to be deleted'
+  126  git push
+  127  git rm oops cancergenes.fasta 
+  128  git rm oops cancer_genes.fasta 
+  129  git commit -m 'removing files'
   130  git push
   131  vi oops2
   132  git add oops2
@@ -14,3 +107,10 @@
   143  man rm
   144  man cp
   145  history
+  146  history > unixBasics.history.txt
+  147  vi unixBasics.history.txt
+  148  git status
+  149  git add unixBasics.history.txt
+  150  git commit -m 'adding history'
+  151  git push
+  152  man history
