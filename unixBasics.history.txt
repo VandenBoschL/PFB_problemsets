@@ -1,0 +1,16 @@
+  130  git push
+  131  vi oops2
+  132  git add oops2
+  133  git commit -m 'adding oops2'
+  134  git push
+  135  rm oops2
+  136  git add oops2
+  137  git commit -m 'removing oops2'
+  138  git push
+  139  vi never
+  140  git add never
+  141  git reset never
+  142  rm never
+  143  man rm
+  144  man cp
+  145  history
