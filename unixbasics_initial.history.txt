@@ -1,0 +1,16 @@
+  178  git branch -M main
+  179  git remote add origin git@github.com:VandenBoschL/PFB_problemsets.git
+  180  git push -u origin main
+  181  vi git_exercises.txt
+  182  git add git_exercises.txt
+  183  git commit -m 'added a line of text'
+  184  git push origin main
+  185  git status
+  186  vi ./git/hooks/pre-commit
+  187  vi .git/hooks/pre-commit
+  188  git status
+  189  chmod +x .git/hooks/pre-commit
+  190  ls -lash .git/hooks/pre*
+  191  cd
+  192  pwd
+  193  git clone git@github.com:prog4biol/pfb2023.git
