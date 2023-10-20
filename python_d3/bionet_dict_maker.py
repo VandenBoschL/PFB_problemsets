@@ -3,8 +3,16 @@
 import sys
 import re
 
+## Usage: Input bionet resource file (1), and a fasta of interest (2)
+
 file_path = sys.argv[1]
 fasta_path = sys.argv[2]
+
+# Generate dictionaries for the Bionet data
+# cut_dict will hold the initial cut sites associated with enzyme names
+# restriction_dict will pair the "uncut" sequence with the cut site replacements
+# The IUPAC dict is necessary for RegExing the recognition sites that are not absolute
+
 
 restriction_dict = {}
 cut_dict = {}
@@ -20,6 +28,9 @@ IUPAC_dict = {'R':'[AG]',
 'V':'[ACG]',
 'N':'[ACGT]'}
 
+# Open bionet, strip the 10 line header
+# Pull remaining lines, split by large white space (not tabs)
+# Put info direct into cut_dict
 
 with open(file_path, 'r') as bionet_file:
 	line_num = 1
@@ -45,7 +56,8 @@ for enzyme in cut_dict:
 
 fasta_dict = {}
 
-# read in fasta, make dict
+# Read in fasta, make dict
+# This could also just be a pandas dataframe
 with open(fasta_path,'r') as fa:
 	for line in fa:
 		line=line.rstrip()
@@ -59,27 +71,38 @@ with open(fasta_path,'r') as fa:
 
 
 
-# for gene in dict, make cuts to sequence, write to cut_seq_dict
+# for gene in dict, make cuts to sequence using the restriction_dict
+# The elements asked for could be saved to objects for later use
+	# But presently, that's not needed, so just print out the information
+# Comment out larger print statements once you prove they work because they take up a lot of space
+
 for gene in fasta_dict:
 	sequence = fasta_dict[gene]
-	for site in restriction_dict:
+	for enzyme in cut_dict:
+		cutsite = cut_dict[enzyme]
+		site = cutsite.replace('^','')
+		for code in IUPAC_dict:
+			site = site.replace(code, IUPAC_dict[code])
 		primed_seq = sequence.replace(site, restriction_dict[site])
 		#print(f'cut sequence:\n{primed_seq}\n')# write seq with cut sites
 		diced = primed_seq.split('^') # split the sequence
-		print(f'There are {len(diced)}') # number of fragments
-		print(f'These are the fragments: {diced}') # print fragments as they originally appeared
-		print(f'# print sorted(split_list, key=len, reverse=True)
+		frag_num = len(diced)
+		frag_lengths = [len(x) for x in diced]
+		total_len = sum(frag_lengths)
+		print(f'Cutting with enzyme: {enzyme} on sequence:{gene}') # For Bonus Question
+		print(f'There are {frag_num} fragments') # number of fragments for 10 and Bonus
+		print(f'The average length of fragment is {total_len / frag_num}')
+		print(f'The largest fragment is {max(frag_lengths)}bp and the smallest is {min(frag_lengths)}bp') # Bonus Question 
+		print(f'These are the fragments: {diced}\n') # print fragments as they originally appeared
+		print(f'These are the fragments in gel order:{sorted(diced, key=len, reverse=True)}')
+		print('\n\n')
 
 
 
 
 ##### Optional Question
-bonus_dict = {}
+# Let's just keep using the same fasta. It does not necessarily need to be different
 
-#with open(user_fasta, 'r') as bonus_seq:
-	#for line in bonus_seq:
-	#line = line.strip()
-#	use some regex to identify sequence id and sequence, write to bonus_dict
 #
 # nest some for loops here
 # outer loop, for enzyme in restriction_dict:
