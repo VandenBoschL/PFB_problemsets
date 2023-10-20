@@ -18,7 +18,7 @@ with open(file_path, 'r') as fa:
 			seq_dict[header] = ''
 			identity = found.group(1)
 			desc = found.group(2)
-			print(f'id:{identity} desc:{desc}')
+			#print(f'id:{identity} desc:{desc}')
 		else:
 			seq_dict[header] += line
 
@@ -27,7 +27,10 @@ cuttable_dict = {}
 for gene in seq_dict:
 	cuttable_dict[gene] = re.sub(restriction, cut, seq_dict[header])
 
-print(seq_dict)
-print(cuttable_dict)
+#print(cuttable_dict)
 
+for gene in cuttable_dict:
+	seq = cuttable_dict[gene]
+	split_seq = seq.split('^')
+	print(sorted(split_seq, key=len, reverse=True))
 

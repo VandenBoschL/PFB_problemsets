@@ -54,6 +54,7 @@ for gene_name in fasta_dict:
 		amino_acid = translation_table[codon]
 		frame_1_translation.append(amino_acid)
 	frame_1_protein = ''.join(frame_1_translation)
+	#print(frame_1_protein)
 	peptide_list.append(frame_1_protein)
 	#rf_2
 	seq_2 = seq[1:]
@@ -101,5 +102,8 @@ for gene_name in fasta_dict:
 	frame_6_protein = ''.join(frame_6_translation)
 	peptide_list.append(frame_6_protein)
 	peptide_dict[gene_name] = peptide_list
-	print(peptide_list)
+#	print(peptide_list)
+	print('/n/n')
+
+
 print(peptide_dict)
