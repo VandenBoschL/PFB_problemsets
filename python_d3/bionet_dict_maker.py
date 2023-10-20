@@ -37,7 +37,7 @@ with open(file_path, 'r') as bionet_file:
 	for line in bionet_file:
 		if line_num <= 10:
 			line_num += 1
-		elif line_num < 30: 
+		elif line_num > 10: 
 			line_num += 1
 			line = line.rstrip()
 			enzyme,rec_site = re.split(r" {3,}", line)
@@ -63,7 +63,7 @@ with open(fasta_path,'r') as fa:
 		line=line.rstrip()
 		found_header = re.search(r'^>(\S+)\s?(.*)', line)
 		if found_header:
-			header = found_header
+			header = found_header.group(1)
 			fasta_dict[header] = ''
 		else:
 			fasta_dict[header] += line
@@ -96,28 +96,5 @@ for gene in fasta_dict:
 		print(f'These are the fragments: {diced}\n') # print fragments as they originally appeared
 		print(f'These are the fragments in gel order:{sorted(diced, key=len, reverse=True)}')
 		print('\n\n')
-
-
-
-
-##### Optional Question
-# Let's just keep using the same fasta. It does not necessarily need to be different
-
-#
-# nest some for loops here
-# outer loop, for enzyme in restriction_dict:
-	#for gene in bonus_dict:
-	#print(gene)
-	#print(enzyme)
-	#new_seq = re.sub(restriction_dict[enzyme], cut_dict[enzyme], bonus_dict[gene])
-	#digested_seq = new_seq.split('^')
-	#print(len(digested_seq))
-	#stats_list = [len(x) for x in digested_seq]
-	#print(sum(stats_list)/len(stats_list))
-	#print(max(stats_list))
-	#print(min(stats_list))
-
-# add some fstrings to make it prettier
-
 
 
